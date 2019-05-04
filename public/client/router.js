@@ -3,9 +3,17 @@ Shortly.Router = Backbone.Router.extend({
     this.$el = options.el;
   },
 
+  //LOGIN will create a GET request to authenticate 
+  //username and password to database
+  
+  //SIGNUP will create a POST request to add 
+  // username and password to database
+
   routes: {
     '': 'index',
-    'create': 'create'
+    'create': 'create',
+    // 'login/:id': 'login',
+    // 'signup/:id': 'signup'
   },
 
   swapView: function(view) {
@@ -20,5 +28,13 @@ Shortly.Router = Backbone.Router.extend({
 
   create: function() {
     this.swapView(new Shortly.createLinkView());
-  }
+  },
+
+  // login: function() {
+  //   //this.
+  // },
+
+  // signup: function() {
+  //   //this.
+  // }
 });

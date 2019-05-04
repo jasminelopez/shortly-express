@@ -13,7 +13,7 @@ var port = 4568;
 // Remove the 'x' from beforeEach block when working on
 // authentication tests.
 /************************************************************/
-var xbeforeEach = function() {};
+//var xbeforeEach = function() {};
 /************************************************************/
 
 
@@ -39,11 +39,11 @@ describe('', function() {
     /* TODO: Update user and password if different than on your local machine            */
     /*************************************************************************************/
     db = mysql.createConnection({
-      user: 'student',
-      password: 'student',
+      user: 'root',
+      password: '',
       database: 'shortly'
     });
-
+    
     /**************************************************************************************/
     /* TODO: If you create a new MySQL tables, add it to the tablenames collection below. */
     /**************************************************************************************/
@@ -66,7 +66,6 @@ describe('', function() {
       var queryString = 'SELECT * FROM users';
       db.query(queryString, function(err, results) {
         if (err) { return done(err); }
-
         expect(results).to.deep.equal([]);
         done();
       });
@@ -123,7 +122,7 @@ describe('', function() {
     });
   });
 
-  xdescribe('Account Creation:', function() {
+  describe('Account Creation:', function() {
 
     it('signup creates a new user record', function(done) {
       var options = {
@@ -170,7 +169,7 @@ describe('', function() {
       });
     });
 
-    it('redirects to signup if the user already exists', function(done) {
+    it('redirects to login if the user already exists', function(done) {
       var options = {
         'method': 'POST',
         'uri': 'http://127.0.0.1:4568/signup',
@@ -184,7 +183,7 @@ describe('', function() {
         if (error) { return done(error); }
         request(options, function(err, response, resBody) {
           if (err) { return done(err); }
-          expect(response.headers.location).to.equal('/signup');
+          expect(response.headers.location).to.equal('/login');
           done();
         });
       });
@@ -208,7 +207,7 @@ describe('', function() {
     });
   });
 
-  xdescribe('Account Login:', function() {
+  describe('Account Login:', function() {
 
     beforeEach(function(done) {
       var options = {
@@ -371,7 +370,7 @@ describe('', function() {
       });
     });
 
-    describe('Session Parser', function() {
+    xdescribe('Session Parser', function() {
       it('initializes a new session when there are no cookies on the request', function(done) {
         var requestWithoutCookies = httpMocks.createRequest();
         var response = httpMocks.createResponse();
@@ -610,7 +609,7 @@ describe('', function() {
       }
     };
 
-    xbeforeEach(function(done) {
+    beforeEach(function(done) {
       var options = {
         'method': 'POST',
         'followAllRedirects': true,
